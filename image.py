@@ -13,15 +13,32 @@ grey = cv2.cvtColor(imageIn, cv2.COLOR_BGR2GRAY )
 human_head = human_head_cascade.detectMultiScale(grey, 1.2, 5)
 
 contador = 0
+
+lista_rostos = []
+
 for (x,y,w,h) in human_head:
     print(x,y,w,h)
     contador += 1
+
+    lista_rostos.append((contador,(x,y), (x+w, y+h)))
+
     #codigo de Matson para identificar os rostos. dica : Usar um mapping rostos = {(id, coordenada), (id, coordenada)} 
-    titulo = str(contador) + " Rosto"
+    titulo = " Rosto" + str(contador) 
     cv2.rectangle(imageIn, (x,y), (x+w, y+h), (255,0,0), 2) #Serve para criar os retângulos a partir das coordenadas
     cv2.putText(imageIn, titulo, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,0,0), 2)#Serve para colocar texto ao lado dos retângulos
 
-print("Rostos selecionados:")
+    
+
+print(lista_rostos)
+
+rosto_escolhido = int(input("Qual rosto você não quer borrar ?"))
+
+    #eliminando pelo valor da array -1  
+lista_rostos.pop(rosto_escolhido -1)
+
+print(lista_rostos) 
+
+
 time.sleep(2)
 
 while True:
@@ -32,8 +49,6 @@ while True:
 
 cv2.destroyAllWindows()#fecha a imagem
 
-
-escolha = input("Selecione um rosto para não esconder: ")
 for (x,y,w,h) in human_head:
     print(x,y,w,h)
     #Código de Arley aqui pra borrar os rostos com as coordenadas, exeto o rosto escolhido
@@ -41,7 +56,7 @@ for (x,y,w,h) in human_head:
 
 #Exibir o resultado Final:
 while True:
-    cv2.imshow('REsultado Final: ',imageIn) 
+    cv2.imshow('Resultado Final: ',imageIn) 
     
     if (cv2.waitKey(1) & 0xFF) == ord('q'): 
         break
