@@ -51,7 +51,19 @@ cv2.destroyAllWindows()#fecha a imagem
 
 for (x,y,w,h) in human_head:
     print(x,y,w,h)
-    #Código de Arley aqui pra borrar os rostos com as coordenadas, exeto o rosto escolhido
+    
+   #Código de Arlley aqui pra borrar os rostos com as coordenadas, exeto o rosto escolhidos
+
+    # Pecorrer as faces detectadas
+    for (contador) in lista_rostos:
+        # Recortar a região da face
+        borrado = imageIn[y:y + h, x:x + w]
+
+        # Aplicar o efeito de desfoque (blur) no rosto escolhido
+        borrado = cv2.GaussianBlur(borrado, (55, 55), 15)
+
+        # Substituir a região da face borrada pela imagem original
+        imageIn[y:y + h, x:x + w] = borrado
 
 
 #Exibir o resultado Final:
