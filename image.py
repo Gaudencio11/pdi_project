@@ -17,6 +17,7 @@ for (x,y,w,h) in human_head:
     print(x,y,w,h)
     contador += 1
     #codigo de Matson para identificar os rostos. dica : Usar um mapping rostos = {(id, coordenada), (id, coordenada)} 
+    ros
     titulo = str(contador) + " Rosto"
     cv2.rectangle(imageIn, (x,y), (x+w, y+h), (255,0,0), 2) #Serve para criar os retângulos a partir das coordenadas
     cv2.putText(imageIn, titulo, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,0,0), 2)#Serve para colocar texto ao lado dos retângulos
